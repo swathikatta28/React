@@ -1,0 +1,67 @@
+Assignment-1
+React assignment-1
+Scenario-1
+Dynamic greeting based on user input
+You have a react application where you need to display a personalized greeting message. The greeting message will be based on the user’s input. If the user is logged in, show a message like, ”Welcome back”[user’s name];if not, show “please log in”. Additionally, display a notification message if the user is logged in.
+Task:
+-Create a greeting component that accepts a prop for the user’s name.
+-Use conditional rendering to check if the user is logged in and display the appropriate message.
+-Implement dynamic styles using inline styles based on the login status.
+Question:
+How would you modify the existing react code to handle a scenario where the app needs to display a personalized greeting message based on whether the user is logged in, and how would you conditionally apply different inline styles based on their login status?
+Greeting.js:
+import React from "react";
+
+const Greeting = ({ userName, isLoggedIn }) => {
+  const greetingMessage = isLoggedIn
+    `? WelcomeBack , ${userName} !`
+     "Please log in";
+
+  const notificationMessage = isLoggedIn
+    ? "You have new notifications!"
+    : "";
+
+  const greetingStyle = {
+    color: isLoggedIn ? "green" : "red",
+    fontSize: "20px",
+    fontWeight: "bold",
+    margin: "10px 0",
+  };
+
+  return (
+    <div>
+      <h2 style={greetingStyle}>{greetingMessage}</h2>
+      {isLoggedIn && <p style={{ color: "blue" }}>{notificationMessage}</p>}
+    </div>
+  );
+};
+
+export default Greeting;
+App.js
+import React, { useState } from "react";
+import Greeting from ". /Greeting" ;
+
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const userName = "John Doe"; // Example name
+
+  return (
+    <div>
+      <Greeting userName={userName} isLoggedIn={isLoggedIn} />
+      <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
+        {isLoggedIn ? "Log Out" : "Log In"}
+      </button>
+    </div>
+  );
+};
+
+export default App;
+
+Scenario 2: Resuable component for multiple cards
+Imagine you’r building a react application where you need to display several user profiles. Each profile contains a name,a greeting message,and an image.you want to create a reusable component for displaying these profiles,so you can easily create cards for each user by just passing different props.
+Task:
+-create a profileCard component that accepts props like name,greeting and imagesrc.
+-Display the profile card within the user’s name,greeting,and image.
+-use this profileCard components multiple times with different props for each users.
+Questions:
+How would you implement a reusable profilecaryd component that accepts dynamic props like name,greeting, and imagesrc and renders these dynamically for multiple users on the same page? Show an example of how to render the multiple profilecard components.
