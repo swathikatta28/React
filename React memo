@@ -1,0 +1,80 @@
+12/02/2025
+
+React memo;
+--it is a HOC(higher order component) is not a React hook.
+--it will stop unnecessary rendering of functional components of its props.
+--it will improve the performance of functional components.
+Ex:
+App.js
+// import React, { useState } from "react";
+// import Greeting from ". /Greeting" ;
+
+// const App = () => {
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+//   const userName = "John Doe"; // Example name
+
+//   return (
+//     <div>
+//       <Greeting userName={userName} isLoggedIn={isLoggedIn} />
+//       <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
+//         {isLoggedIn ? "Log Out" : "Log In"}
+//       </button>
+//     </div>
+//   );
+// };
+
+// export default App;
+import {useState} from "react";
+
+import ChildA from "./childA"
+import ChildB from "./childB"
+
+const Parent=()=>{
+    const[count,setCount]=useState(0);
+    const increment=()=>{
+        setCount(c=>c+1);
+
+    }
+    return(
+        <div>
+            <ChildA/>
+            <ChildB count={count} increment={increment}/>
+        </div>
+
+    )
+}
+export default Parent;
+childA.js
+const ChildA=()=>{
+    console.log("Child A rendered")
+    return<h2>This is child A</h2>
+}
+export default ChildA;
+childB.js
+const ChildB=({count,increment})=>{
+    console.log("ChildB rendered")
+    return(
+        <div>
+            <h1>Count:{count}</h1>
+            <button onClick={increment}>Increment</button>
+        </div>
+    )
+}
+export default ChildB;
+O/P:
+ 
+Using memo:
+childB.js
+import { memo} from "react";
+const ChildB=({count,increment})=>{
+    console.log("ChildB rendered")
+    return(
+        <div>
+            <h1>Count:{count}</h1>
+            <button onClick={increment}>Increment</button>
+        </div>
+    )
+}
+export default memo (ChildB);
+
+
